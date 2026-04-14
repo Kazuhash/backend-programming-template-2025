@@ -7,7 +7,7 @@ async function gachayu(email) {
   if (kenangan && kenangan.count >= 5) {
     return { error: 'jangan maruk,besok coba lagih' };
   }
-  await gachaRepository.batashadiah(email, today);
+  await gachaRepository.batasgacha(email, today);
 
   const hadiahyangada = await gachaRepository.cekhadiah();
   if (hadiahyangada.length === 0) {
