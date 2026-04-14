@@ -11,7 +11,7 @@ async function gachakikir(request, response, next) {
 
     const result = await gachaService.gachayu(email);
 
-    if (result.error === 'Udahan ya') {
+    if (result.error === 'jangan maruk,besok coba lagih') {
       throw errorResponder(
         errorTypes.FORBIDDEN,
         'Stop! Kamu udah gacha 5 kali hari ini. Istirahat dan sentuh rumput.'

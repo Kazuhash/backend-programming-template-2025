@@ -17,7 +17,7 @@ async function gachayu(email) {
   const rollin = Math.random();
   let dpthadiah = null;
 
-  const targeto = hadiahyangada.find((prize) => rollin <= prize.probability);
+  const targeto = hadiahyangada.find((prize) => rollin <= prize.mungkinkah);
 
   if (targeto) {
     const ambil = await gachaRepository.ambilhadiyah(targeto.id);

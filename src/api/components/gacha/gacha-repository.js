@@ -19,7 +19,7 @@ async function cekhadiah() {
 async function ambilhadiyah(prizeId) {
   return Prizes.findOneAndUpdate(
     { _id: prizeId, $expr: { $lt: ['$winners', '$quota'] } },
-    { $inc: { winnersCount: 1 } },
+    { $inc: { winners: 1 } },
     { new: true }
   );
 }
