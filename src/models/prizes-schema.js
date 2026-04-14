@@ -5,6 +5,6 @@ module.exports = (db) =>
       name: String,
       quota: Number,
       winners: { type: Number, default: 0 },
-      probability: Number,
+      mungkinkah: Number,
     })
   );
