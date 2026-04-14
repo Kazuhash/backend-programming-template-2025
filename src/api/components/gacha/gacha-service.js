@@ -20,7 +20,8 @@ async function gachayu(email) {
   const targeto = hadiahyangada.find((prize) => rollin <= prize.mungkinkah);
 
   if (targeto) {
-    const ambil = await gachaRepository.ambilhadiyah(targeto.id);
+    // eslint-disable-next-line no-underscore-dangle
+    const ambil = await gachaRepository.ambilhadiyah(targeto._id);
     if (ambil) {
       dpthadiah = ambil;
     }
