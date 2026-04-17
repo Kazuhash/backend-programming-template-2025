@@ -7,4 +7,7 @@ module.exports = (app) => {
   app.use('/gacha', route);
 
   route.post('/roll', gachaController.gachakikir);
+  route.get('/history', gachaController.riwayat);
+  route.get('/prizes', gachaController.sisakuota);
+  route.get('/winners', gachaController.daftarwin);
 };

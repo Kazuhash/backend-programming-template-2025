@@ -1,4 +1,4 @@
-const { Prizes, GachaHistory } = require('../../../models');
+const { Prizes, GachaHistory, GachaLog } = require('../../../models');
 
 async function cekkenangan(email, date) {
   return GachaHistory.findOne({ email, date });
@@ -24,9 +24,29 @@ async function ambilhadiyah(prizeId) {
   );
 }
 
+async function catatlog(email, prizeName) {
+  return GachaLog.create({ email, prizeName });
+}
+
+async function Riwayat(email) {
+  return GachaLog.find({ email }).sort({ date: -1 });
+}
+
+async function allhadiyah() {
+  return Prizes.find({});
+}
+
+async function allwin() {
+  return GachaLog.find({ prizeName: { $ne: 'Zonk' } });
+}
+
 module.exports = {
   cekkenangan,
   batasgacha,
   cekhadiah,
   ambilhadiyah,
+  catatlog,
+  Riwayat,
+  allhadiyah,
+  allwin,
 };

@@ -28,12 +28,56 @@ async function gachayu(email) {
   }
 
   if (dpthadiah) {
+    await gachaRepository.catatlog(email, dpthadiah.name);
     return { won: true, prizeName: dpthadiah.name };
   }
 
-  return { won: false, message: 'Ampun deh zonk! Coba lagi besok.' };
+  await gachaRepository.catatlog(email, 'Zonk');
+  return { won: false, message: 'zonk! besok lagi yea.' };
+}
+
+async function histories(email) {
+  const history = await gachaRepository.Riwayat(email);
+  return history.map((h) => ({
+    waktu: h.date,
+    hadiah: h.prizeName === 'Zonk' ? 'Tidak dapat hadiah (Zonk)' : h.prizeName,
+  }));
+}
+
+async function sisa() {
+  const prizes = await gachaRepository.allhadiyah();
+  return prizes.map((p) => ({
+    hadiah: p.name,
+    sisa_kuota: p.quota - p.winners,
+  }));
+}
+
+function sensor(text) {
+  return text
+    .split('')
+    .map((char) => {
+      if (char === ' ' || char === '@' || char === '.') return char;
+      return Math.random() > 0.5 ? '*' : char;
+    })
+    .join('');
+}
+
+async function winner() {
+  const winners = await gachaRepository.allwin();
+  const result = {};
+
+  winners.forEach((w) => {
+    if (!result[w.prizeName]) result[w.prizeName] = [];
+    const maskedName = sensor(w.email.split('@')[0]);
+    result[w.prizeName].push(maskedName);
+  });
+
+  return result;
 }
 
 module.exports = {
   gachayu,
+  histories,
+  sisa,
+  winner,
 };

@@ -34,6 +34,41 @@ async function gachakikir(request, response, next) {
   }
 }
 
+async function riwayat(request, response, next) {
+  try {
+    const { email } = request.query;
+    if (!email)
+      throw errorResponder(errorTypes.VALIDATION_ERROR, 'Email harus diisi');
+    const data = await gachaService.histories(email);
+    return response
+      .status(200)
+      .json({ email, total_roll: data.length, histori: data });
+  } catch (error) {
+    return next(error);
+  }
+}
+
+async function sisakuota(request, response, next) {
+  try {
+    const data = await gachaService.sisa();
+    return response.status(200).json({ status: 'success', data });
+  } catch (error) {
+    return next(error);
+  }
+}
+
+async function daftarwin(request, response, next) {
+  try {
+    const data = await gachaService.winner();
+    return response.status(200).json({ status: 'success', pemenang: data });
+  } catch (error) {
+    return next(error);
+  }
+}
+
 module.exports = {
   gachakikir,
+  riwayat,
+  sisakuota,
+  daftarwin,
 };
